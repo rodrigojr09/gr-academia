@@ -1,23 +1,30 @@
 import Link from "next/link";
 import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa";
 
-interface GRFooterProps {
-  aboutText: string;
-  links: { href: string; label: string }[];
+
+export interface GRFooterLink {
+  href: string;
+  label: string;
+}
+
+export interface GRFooterSocialLink {
+  platform: "Facebook" | "Twitter" | "Instagram" | "LinkedIn";
+  url: string;
+}
+export interface GRFooterProps {
+  text: string;
+  links: GRFooterLink[];
   contact: { phone: string; email: string };
-  socialLinks: {
-    platform: "Facebook" | "Twitter" | "Instagram" | "LinkedIn";
-    url: string;
-  }[];
-  footerText: string;
+  socialLinks: GRFooterSocialLink[];
+  academiaName?: JSX.Element | string;
 }
 
 export default function GRFooter({
-  aboutText,
+  text,
   links,
   contact,
   socialLinks,
-  footerText,
+  academiaName
 }: GRFooterProps) {
   return (
     <footer className="bg-gray-800 text-white py-8">
@@ -25,7 +32,7 @@ export default function GRFooter({
         <div className="flex flex-wrap justify-between mb-8">
           <div className="w-full md:w-1/3 mb-6 md:mb-0">
             <h3 className="text-xl font-bold mb-4">Sobre Nós</h3>
-            <p>{aboutText}</p>
+            <p>{text}</p>
           </div>
           <div className="w-full md:w-1/3 mb-6 md:mb-0">
             <h3 className="text-xl font-bold mb-4">Links Rápidos</h3>
@@ -70,7 +77,10 @@ export default function GRFooter({
           </div>
         </div>
         <div className="text-center mt-8 border-t border-gray-700 pt-4">
-          <p>{footerText}</p>
+          <p>
+            © {new Date().getFullYear()} {academiaName}. Todos os direitos
+            reservados.
+          </p>
         </div>
       </div>
     </footer>

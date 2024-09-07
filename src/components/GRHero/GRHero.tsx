@@ -1,5 +1,5 @@
 export interface GRHeroProps {
-    title: string;
+    title: string | JSX.Element;
     body: string;
 }
 

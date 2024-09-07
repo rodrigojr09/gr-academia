@@ -7,7 +7,7 @@ export interface GRNavbarItem {
 }
 
 export interface GRNavbarProps {
-  title: string;
+  title: string|JSX.Element;
   itens: GRNavbarItem[];
 }
 

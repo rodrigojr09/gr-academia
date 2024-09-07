@@ -1,27 +1,23 @@
 import "@/styles/globals.css";
-import GREmpresa from "@/utils/gr-api/GREmpresa";
 import type { AppProps } from "next/app";
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useState } from "react";
 import GRButton from "../components/GRButton/GRButton";
 import GRInput from "../components/GRInput/GRInput";
 import GRForm from "@/components/GRForm/GRForm";
 import { FaCogs } from "react-icons/fa";
 import { Transition } from "@headlessui/react";
 import { CgClose } from "react-icons/cg";
+import GREmpresa from "@/components/Providers/GREmpresa";
 
 export default function App({ Component, pageProps }: AppProps) {
-  const [empresa, setEmpresa] = useState<GREmpresa | undefined>();
+  const empresa = GREmpresa();
   const [settingsOpen, setSettingsOpen] = useState<boolean>(false);
-  const [nomeEmpresa, setNomeEmpresa] = useState("");
+  //const [nomeEmpresa, setNomeEmpresa] = useState("");
 
   function handleFormSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     // Adicione a lógica de salvamento do formulário aqui
   }
-
-  useEffect(() => {
-    setEmpresa(new GREmpresa());
-  }, []);
 
   if (empresa)
     return (
@@ -45,7 +41,10 @@ export default function App({ Component, pageProps }: AppProps) {
           leaveTo="opacity-0"
         >
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-20">
-            <button className="text-white right-0 top-0 text-4xl fixed" onClick={()=>setSettingsOpen(false)}>
+            <button
+              className="text-white right-0 top-0 text-4xl fixed"
+              onClick={() => setSettingsOpen(false)}
+            >
               <CgClose />
             </button>
             <div className="bg-white shadow-lg rounded-md p-6 border border-gray-300 w-full max-w-md">
@@ -57,8 +56,8 @@ export default function App({ Component, pageProps }: AppProps) {
                   label="Nome da Academia"
                   type="text"
                   id="academyName"
-                  value={nomeEmpresa}
-                  onChange={(e) => setNomeEmpresa(e.target.value)}
+                  value={empresa.nome}
+                  onChange={(e) => empresa.setNome(e.target.value)}
                   placeholder="Digite o nome da academia"
                   required
                 />

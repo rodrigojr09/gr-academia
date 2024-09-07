@@ -1,5 +1,5 @@
-import GREmpresa from "./gr-api/GREmpresa";
+import { GREmpresaType } from "@/components/Providers/GREmpresa";
 
 export interface GRProps {
-    empresa: GREmpresa;
+  empresa: GREmpresaType;
 }
