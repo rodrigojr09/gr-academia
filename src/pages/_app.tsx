@@ -1,67 +1,73 @@
 import "@/styles/globals.css";
 import GREmpresa from "@/utils/gr-api/GREmpresa";
 import type { AppProps } from "next/app";
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import GRButton from "../components/GRButton";
-import GRInput from "../components/GRInput";
-import GRForm from "@/components/GRForm";
+import { FormEvent, useEffect, useState } from "react";
+import GRButton from "../components/GRButton/GRButton";
+import GRInput from "../components/GRInput/GRInput";
+import GRForm from "@/components/GRForm/GRForm";
+import { FaCogs } from "react-icons/fa";
+import { Transition } from "@headlessui/react";
+import { CgClose } from "react-icons/cg";
 
 export default function App({ Component, pageProps }: AppProps) {
-  const router = useRouter();
   const [empresa, setEmpresa] = useState<GREmpresa | undefined>();
-  const [nomeEmpresa, setNomeEmpresa] = useState<string>("");
-  const [loaded, setLoaded] = useState<boolean>(false);
+  const [settingsOpen, setSettingsOpen] = useState<boolean>(false);
+  const [nomeEmpresa, setNomeEmpresa] = useState("");
+
+  function handleFormSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    // Adicione a lógica de salvamento do formulário aqui
+  }
 
   useEffect(() => {
-    const queryEmpresa = router.query.empresa;
-    if (queryEmpresa && typeof queryEmpresa === "string") {
-      setEmpresa(new GREmpresa(queryEmpresa));
-    }
-    setLoaded(true);
-  }, [router.query]);
+    setEmpresa(new GREmpresa());
+  }, []);
 
-  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (nomeEmpresa) {
-      setEmpresa(new GREmpresa(nomeEmpresa));
-    }
-  };
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNomeEmpresa(e.target.value);
-  };
-
-  if (!loaded) {
-    return <div>Carregando...</div>;
-  } else if (loaded && !empresa) {
+  if (empresa)
     return (
-      <div className="flex justify-center items-center min-h-screen bg-gray-100">
-        <GRForm onSubmit={handleFormSubmit}>
-          <h2 className="text-2xl font-bold mb-6 text-center">
-            Nome da Academia
-          </h2>
-          <div className="mb-4">
-            <label
-              htmlFor="academyName"
-              className="block text-gray-700 text-sm font-semibold mb-2"
-            >
-              Nome da Academia
-            </label>
-            <GRInput
-              type="text"
-              id="academyName"
-              value={nomeEmpresa}
-              onChange={handleInputChange}
-              placeholder="Digite o nome da academia"
-              required
-            />
+      <div className="flex relative">
+        <Component {...pageProps} empresa={empresa} />
+        <div className="fixed z-10 right-0 top-1/3 flex items-center">
+          <button
+            className="py-2 px-4 rounded-l-full bg-cyan-500 flex items-center text-white"
+            onClick={() => setSettingsOpen(!settingsOpen)}
+          >
+            <FaCogs />
+          </button>
+        </div>
+        <Transition
+          show={settingsOpen}
+          enter="transition-opacity duration-200"
+          enterFrom="opacity-0"
+          enterTo="opacity-100"
+          leave="transition-opacity duration-200"
+          leaveFrom="opacity-100"
+          leaveTo="opacity-0"
+        >
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-20">
+            <button className="text-white right-0 top-0 text-4xl fixed" onClick={()=>setSettingsOpen(false)}>
+              <CgClose />
+            </button>
+            <div className="bg-white shadow-lg rounded-md p-6 border border-gray-300 w-full max-w-md">
+              <h3 className="text-xl font-bold mb-4 text-center">
+                Configurações
+              </h3>
+              <GRForm onSubmit={handleFormSubmit}>
+                <GRInput
+                  label="Nome da Academia"
+                  type="text"
+                  id="academyName"
+                  value={nomeEmpresa}
+                  onChange={(e) => setNomeEmpresa(e.target.value)}
+                  placeholder="Digite o nome da academia"
+                  required
+                />
+                <GRButton>Salvar</GRButton>
+              </GRForm>
+            </div>
           </div>
-          <GRButton>Avançar</GRButton>
-        </GRForm>
+        </Transition>
       </div>
     );
-  } else if (loaded && empresa) {
-    return <Component {...pageProps} empresa={empresa} />;
-  }
+  return <div></div>;
 }
