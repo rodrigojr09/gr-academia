@@ -4,13 +4,19 @@ interface GRFormProps
   extends DetailedHTMLProps<
     FormHTMLAttributes<HTMLFormElement>,
     HTMLFormElement
-  > {}
+  > {
+  className?: undefined;
+}
 
 export default function GRForm(props: GRFormProps) {
   return (
     <form
-      {...props}
-      className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full"
+      className={`bg-white p-8 overflow-y-auto max-h-[90vh] rounded-xl shadow-lg max-w-md w-full`}
+      autoFocus
+      {...(props as DetailedHTMLProps<
+        FormHTMLAttributes<HTMLFormElement>,
+        HTMLFormElement
+      >)}
     >
       {props.children}
     </form>

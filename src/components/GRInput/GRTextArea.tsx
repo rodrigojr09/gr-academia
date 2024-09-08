@@ -18,19 +18,19 @@ export default function GRTextArea(props: GRTextAreaProps) {
       textareaRef.current.style.height = "auto"; // Reseta a altura
       textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`; // Define a altura de acordo com o conteúdo
     }
-  }, [value]); // Dispara sempre que o valor do textarea muda
+  }, [value]);
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setValue(e.target.value);
     if (props.onChange) {
-      props.onChange(e); // Caso queira passar para o controle superior
+      props.onChange(e);
     }
   };
 
   return (
     <div className="mb-4">
       <label
-        htmlFor={props.name}
+        htmlFor={props.id}
         className="block text-gray-700 text-sm font-semibold mb-2"
       >
         {props.label}
@@ -38,11 +38,12 @@ export default function GRTextArea(props: GRTextAreaProps) {
       <textarea
         {...props}
         ref={textareaRef}
+        id={props.id}
         value={value}
         onChange={handleChange}
         className="w-full px-3 py-2 border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
-        style={{ height: "auto", overflow: "hidden" }} // Impede o scrollbar vertical
-      ></textarea>
+        style={{ height: "auto", overflow: "hidden" }}
+      />
     </div>
   );
 }

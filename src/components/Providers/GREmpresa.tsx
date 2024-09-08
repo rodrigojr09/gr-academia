@@ -23,6 +23,7 @@ export default function GREmpresa() {
   const [nome, setNome] = useState<string>("Academia Fit");
   const [navbarItens, setNavbarItens] = useState<GRNavbarItem[]>([
     { label: "Inicio", href: "/", align: "center" },
+    { label: "Serviços", href: "/#services", align: "center" },
     { label: "Entrar", href: "/login", align: "right" },
   ]);
   const [heroText, setHeroText] = useState<string>(
