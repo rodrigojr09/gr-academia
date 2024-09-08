@@ -14,7 +14,7 @@ export default function GRCard({
   tags,
 }: GRCardProps) {
   return (
-    <div className="max-w-sm rounded overflow-hidden shadow-lg bg-white">
+    <div className="w-full md:max-w-sm rounded overflow-hidden shadow-lg bg-white">
       {image && (
         <Image
           src={image || "/400x250.png"}

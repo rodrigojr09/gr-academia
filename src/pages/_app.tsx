@@ -1,6 +1,6 @@
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import GRButton from "../components/GRButton/GRButton";
 import GRInput from "../components/GRInput/GRInput";
 import GRForm from "@/components/GRForm/GRForm";
@@ -8,6 +8,7 @@ import { FaCogs } from "react-icons/fa";
 import { Transition } from "@headlessui/react";
 import { CgClose } from "react-icons/cg";
 import GREmpresa from "@/components/Providers/GREmpresa";
+import GRTextArea from "@/components/GRInput/GRTextArea";
 
 export default function App({ Component, pageProps }: AppProps) {
   const empresa = GREmpresa();
@@ -19,13 +20,21 @@ export default function App({ Component, pageProps }: AppProps) {
     // Adicione a lógica de salvamento do formulário aqui
   }
 
+  useEffect(() => {
+    document.addEventListener("keyup", (e) => {
+      if (e.key === "Escape") {
+        setSettingsOpen(false);
+      } else console.log(e.key);
+    });
+  }, []);
+
   if (empresa)
     return (
       <div className="flex relative">
         <Component {...pageProps} empresa={empresa} />
         <div className="fixed z-10 right-0 top-1/3 flex items-center">
           <button
-            className="py-2 px-4 rounded-l-full bg-cyan-500 flex items-center text-white"
+            className="p-1 text-2xl pr-4 rounded-l-full bg-cyan-500 flex items-center text-white"
             onClick={() => setSettingsOpen(!settingsOpen)}
           >
             <FaCogs />
@@ -42,7 +51,7 @@ export default function App({ Component, pageProps }: AppProps) {
         >
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-20">
             <button
-              className="text-white right-0 top-0 text-4xl fixed"
+              className="text-white right-5 top-5 text-4xl fixed"
               onClick={() => setSettingsOpen(false)}
             >
               <CgClose />
@@ -59,6 +68,14 @@ export default function App({ Component, pageProps }: AppProps) {
                   value={empresa.nome}
                   onChange={(e) => empresa.setNome(e.target.value)}
                   placeholder="Digite o nome da academia"
+                  required
+                />
+                <GRTextArea
+                  label="Frase para Slogan"
+                  id="sloganText"
+                  value={empresa.heroText}
+                  onChange={(e) => empresa.setHeroText(e.target.value)}
+                  placeholder="Digite o slogan da academia"
                   required
                 />
                 <GRButton>Salvar</GRButton>

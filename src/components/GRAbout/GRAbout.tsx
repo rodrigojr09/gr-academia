@@ -14,11 +14,11 @@ export interface GRAboutProps {
 
 export default function GRAbout({ itens }: GRAboutProps) {
   return (
-    <section id="about" className="p-10 bg-gray-100 flex flex-col">
+    <section id="about" className="md:p-10 bg-gray-100 flex flex-col">
       {itens.map((item, i) => (
         <div
           key={i}
-          className={`bg-white mx-auto rounded-xl w-2/3 p-6 my-6 shadow-md ${
+          className={`bg-white mx-auto rounded-xl w-full md:w-2/3 p-6 my-6 shadow-md ${
             item.align === "client" ? "text-center" : ""
           }`}
         >
@@ -28,11 +28,11 @@ export default function GRAbout({ itens }: GRAboutProps) {
             <p className="text-lg text-gray-700">{item.body}</p>
           ) : (
             <div
-              className={`flex w-full ${
-                item.align === "left" ? "flex-row" : "flex-row-reverse"
+              className={`flex w-full flex-col-reverse ${
+                item.align === "left" ? "md:flex-row" : "md:flex-row-reverse"
               }`}
             >
-              <div className="w-1/2 flex justify-center items-center">
+              <div className="w-full md:w-1/2 flex justify-center items-center">
                 <Image
                   src={item.image || "/700x500.png"}
                   width={300}
@@ -41,7 +41,7 @@ export default function GRAbout({ itens }: GRAboutProps) {
                   alt="imagem sobre"
                 />
               </div>
-              <div className="w-1/2 p-4 flex items-center">
+              <div className="w-full md:w-1/2 p-4 flex items-center">
                 <p className="text-lg text-gray-700">{item.body}</p>
               </div>
             </div>
