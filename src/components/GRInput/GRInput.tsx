@@ -8,13 +8,14 @@ interface GRInputProps
     HTMLInputElement
   > {
   label: string;
+  id: string;
 }
 
 function GRInput(props: GRInputProps) {
   return (
     <div className="mb-4">
       <label
-        htmlFor={props.name}
+        htmlFor={props.id}
         className="block text-gray-700 text-sm font-semibold mb-2"
       >
         {props.label}

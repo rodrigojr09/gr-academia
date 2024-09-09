@@ -6,6 +6,7 @@ export interface GRTextAreaProps
     HTMLTextAreaElement
   > {
   label: string;
+  id: string;
 }
 
 export default function GRTextArea(props: GRTextAreaProps) {

@@ -11,7 +11,7 @@ interface GRFormProps
 export default function GRForm(props: GRFormProps) {
   return (
     <form
-      className={`bg-white p-8 overflow-y-auto max-h-[90vh] rounded-xl shadow-lg max-w-md w-full`}
+      className={`bg-white text-black p-8 overflow-y-auto max-h-[90vh] rounded-xl shadow-lg max-w-md w-full`}
       autoFocus
       {...(props as DetailedHTMLProps<
         FormHTMLAttributes<HTMLFormElement>,

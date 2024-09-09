@@ -11,7 +11,7 @@ import GREmpresa from "@/components/Providers/GREmpresa";
 import GRTextArea from "@/components/GRInput/GRTextArea";
 import { IoIosArrowDown } from "react-icons/io";
 
-export default function App({ Component, pageProps }: AppProps) {
+export default function App({ Component, pageProps, router }: AppProps) {
   const empresa = GREmpresa();
   const [settingsOpen, setSettingsOpen] = useState<boolean>(false);
   const [serviceOpen, setServiceOpen] = useState<number>(-1);
@@ -35,7 +35,7 @@ export default function App({ Component, pageProps }: AppProps) {
     };
   }, []);
 
-  if (empresa) {
+  if (empresa && !router.asPath.startsWith("/admin")) {
     return (
       <div className="relative">
         <Component {...pageProps} empresa={empresa} />
@@ -119,6 +119,7 @@ export default function App({ Component, pageProps }: AppProps) {
                       >
                         <GRInput
                           label="Título do Serviço"
+                          id="service-title"
                           value={service.title}
                           onChange={(e) =>
                             empresa.setServices((services) =>
@@ -135,6 +136,7 @@ export default function App({ Component, pageProps }: AppProps) {
                           }
                         />
                         <GRTextArea
+                          id="service-description"
                           label="Descrição do Serviço"
                           value={service.description}
                           onChange={(e) =>
@@ -162,6 +164,8 @@ export default function App({ Component, pageProps }: AppProps) {
         </Transition>
       </div>
     );
+  } else if (router.asPath.startsWith("/admin")) {
+    return <Component />;
   }
   return <div></div>;
 }
