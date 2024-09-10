@@ -17,14 +17,3 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #c4c4c4;
 }
-
-@keyframes openForm {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}

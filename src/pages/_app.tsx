@@ -1,15 +1,12 @@
 import "@/styles/globals.css";
+import 'grsistemas-ui/dist/GRStyles.css';
 import type { AppProps } from "next/app";
-import { FormEvent, useEffect, useState } from "react";
-import GRButton from "../components/GRButton/GRButton";
-import GRInput from "../components/GRInput/GRInput";
-import GRForm from "@/components/GRForm/GRForm";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { FaCogs } from "react-icons/fa";
 import { Transition } from "@headlessui/react";
 import { CgClose } from "react-icons/cg";
-import GREmpresa from "@/components/Providers/GREmpresa";
-import GRTextArea from "@/components/GRInput/GRTextArea";
 import { IoIosArrowDown } from "react-icons/io";
+import { GREmpresa, GRForm, GRInput, GRTextArea, GRButton } from "grsistemas-ui";
 
 export default function App({ Component, pageProps, router }: AppProps) {
   const empresa = GREmpresa();
@@ -73,7 +70,9 @@ export default function App({ Component, pageProps, router }: AppProps) {
                 type="text"
                 id="academyName"
                 value={empresa.nome}
-                onChange={(e) => empresa.setNome(e.target.value)}
+                onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                  empresa.setNome(e.target.value)
+                }
                 placeholder="Digite o nome da academia"
                 required
               />
@@ -81,7 +80,9 @@ export default function App({ Component, pageProps, router }: AppProps) {
                 label="Frase para Slogan"
                 id="sloganText"
                 value={empresa.heroText}
-                onChange={(e) => empresa.setHeroText(e.target.value)}
+                onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                  empresa.setHeroText(e.target.value)
+                }
                 placeholder="Digite o slogan da academia"
                 required
               />
@@ -121,9 +122,9 @@ export default function App({ Component, pageProps, router }: AppProps) {
                           label="Título do Serviço"
                           id="service-title"
                           value={service.title}
-                          onChange={(e) =>
-                            empresa.setServices((services) =>
-                              services.map((s, i2) => {
+                          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                            empresa.setServices(
+                              empresa.services.map((s, i2) => {
                                 if (i === i2) {
                                   return {
                                     ...s,
@@ -139,9 +140,9 @@ export default function App({ Component, pageProps, router }: AppProps) {
                           id="service-description"
                           label="Descrição do Serviço"
                           value={service.description}
-                          onChange={(e) =>
-                            empresa.setServices((services) =>
-                              services.map((s, i2) => {
+                          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                            empresa.setServices(
+                              empresa.services.map((s, i2) => {
                                 if (i === i2) {
                                   return {
                                     ...s,

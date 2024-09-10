@@ -16,6 +16,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "../gr-api/src/retryWithBackoff.ts", "../gr-api/src/pages/admin.tsx"],
   "exclude": ["node_modules"]
 }
