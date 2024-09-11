@@ -40,9 +40,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
           <button
             className="p-2 text-2xl pr-4 rounded-l-full bg-cyan-500 flex items-center text-white"
             onClick={() => setSettingsOpen(!settingsOpen)}
-          >
-            <FaCogs />
-          </button>
+          ><FaCogs /></button>
         </div>
 
         <Transition
