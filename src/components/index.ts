@@ -157,3 +157,4 @@ export { default as GRServices } from "./GRServices/GRServices";
 export { default as GREmpresa } from "./Providers/GREmpresa";
 
 export { default as GRAdminSection } from "./GRAdmin/GRAdminSection";
+export { default as GRConfig } from "./GRConfig/GRConfig";

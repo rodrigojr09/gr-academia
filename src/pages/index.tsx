@@ -1,5 +1,5 @@
 import { GRProps } from "@/utils/type";
-import { GRAbout, GRFooter, GRHero, GRNavbar, GRServices } from "@/api";
+import { GRAbout, GRFooter, GRHero, GRNavbar, GRServices } from "@/components";
 
 export default function Home({ empresa }: GRProps) {
 	return (

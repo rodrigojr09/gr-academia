@@ -1,4 +1,4 @@
-import { GREmpresaType } from "@/api/Providers/GREmpresa";
+import { GREmpresaType } from "@/components/Providers/GREmpresa";
 
 export interface GRProps {
 	empresa: GREmpresaType;

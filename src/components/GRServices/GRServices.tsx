@@ -1,5 +1,4 @@
-import { GRCard } from "..";
-import { GRServicesProps } from "..";
+import { GRServicesProps, GRCard } from "..";
 
 export default function GRServices({ itens }: GRServicesProps) {
 	return (
